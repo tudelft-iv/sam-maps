@@ -19,9 +19,9 @@ rc_modules = {
 
 
 def build_model(config):
-    rge = rge_modules[config.method.model_name](config=config)
-    rs = rs_modules[config.method.model_name](config=config)
-    rc = rc_modules[config.method.model_name](config=config)
+    rge = rge_modules[config.rge_module.model_name](config=config)
+    rs = rs_modules[config.rs_module.model_name](config=config)
+    rc = rc_modules[config.rc_module.model_name](config=config)
 
     model = Model(config, rge, rs, rc)
 

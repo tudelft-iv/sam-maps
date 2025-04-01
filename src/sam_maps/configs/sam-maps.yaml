@@ -1,4 +1,5 @@
 
-rge_module: samroad
-rs_module: auto-rs
-rc_module: auto-rc
+defaults:
+ - rge_module: samroad
+ - rs_module: auto-rs
+ - rc_module: auto-rc

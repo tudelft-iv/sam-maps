@@ -1,1 +1,1 @@
-from auto_rs import AutoRS
+from .auto_rs import AutoRS

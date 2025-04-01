@@ -1,1 +1,1 @@
-from auto_rc import AutoRC
+from .auto_rc import AutoRC

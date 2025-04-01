@@ -1,0 +1,32 @@
+[tool.isort]
+profile = "black"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: Apache Software License",
+]
+name = "sam-maps"
+version = "1.0.0"
+authors = [{ name = "Hidde Boekema", email = "h.j.boekema@tudelft.nl" }]
+description = "The SAM-Maps pipeline."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "matplotlib",
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = ["black", "isort", "pytest", "pytest-xdist", "twine", "build"]
+
+[project.urls]
+"Homepage" = "https://gitlab.tudelft.nl/hidde_students/sam-maps#"
+"Code" = "https://gitlab.tudelft.nl/hidde_students/sam-maps#"
+"Bug Tracker" = "https://gitlab.tudelft.nl/hidde_students/sam-maps/-/issues" 
