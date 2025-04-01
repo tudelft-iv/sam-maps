@@ -12,8 +12,17 @@ class Model(nn.Module):
         self.rc = rc
 
     def forward(self, inputs):
-        rg = self.rge(inputs)
-        rs = self.rs(inputs, rg)
-        rc = self.rc(rg, rs)
+        rg = self.get_roadgraph(inputs)
+        rs = self.get_semantic_mask(inputs, rg)
+        rc = self.get_connected_map(rg, rs)
 
         return rg, rs, rc
+
+    def get_roadgraph(self, inputs):
+        return self.rge(inputs)
+
+    def get_semantic_mask(self, inputs, roadgraph):
+        return self.rs(inputs, roadgraph)
+
+    def get_connected_map(self, roadgraph, semantic_mask):
+        return self.rc(roadgraph, semantic_mask)
