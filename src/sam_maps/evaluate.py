@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 import hydra
 from omegaconf import OmegaConf
 
@@ -25,23 +26,26 @@ def main(config):
     # Load and preprocess ground truth data
     gt_lanes, gt_polygons = load_geodataframes(config.gt_datapath)
     gdf_gt = preprocess_ground_truth(gt_lanes, gt_polygons)
+    print("GT area:", gdf_gt.geometry.area.sum())
 
     # Load and merge prediction data
     pred_lanes, pred_polygons = load_geodataframes(config.pred_datapath)
     gdf_pred = merge_geometries(pred_lanes, pred_polygons)
-
-    print(gdf_gt)
-    print(gdf_gt.crs)
-    print(gdf_pred.crs)
+    print("Pred area:", gdf_pred.geometry.area.sum())
 
     # Ensure coordinate reference systems match
     # gdf_gt = gdf_gt.to_crs(gdf_pred.crs)
 
+    BUFFER = 2
+    mask = gdf_gt.geometry.union_all().buffer(BUFFER)
+
     # Compute and print coverage metrics
-    metrics = compute_coverage_metrics(gdf_gt, gdf_pred)
+    metrics = compute_coverage_metrics(gdf_gt, gdf_pred, mask)
     print(
         f"IoU: {metrics['iou']:.3f}\nRecall: {metrics['recall']:.3f}\nPrecision: {metrics['precision']:.3f}"
     )
+    if "buffer_covered" in metrics:
+        print(f"Buffer covered: {100*metrics['buffer_covered']:.01f}%")
 
 
 def merge_geometries(
@@ -51,36 +55,40 @@ def merge_geometries(
     return gpd.overlay(lanes, polygons, how="union", keep_geom_type=True)
 
 
-def compute_coverage_metrics(gpd_A: gpd.GeoDataFrame, gpd_B: gpd.GeoDataFrame) -> dict:
-    """Calculate IoU and Intersection over Ground Truth area."""
+def compute_coverage_metrics(
+    gpd_A: gpd.GeoDataFrame,
+    gpd_B: gpd.GeoDataFrame,
+    mask: Optional[gpd.GeoDataFrame] = None,
+) -> dict:
+    """Calculate IoU, precision, and recall for two geometries."""
+    results = {}
+
     geom_A = gpd_A.geometry.union_all()
     geom_B = gpd_B.geometry.union_all()
 
-    mask = geom_A.buffer(2)
-    buffer = mask.difference(geom_A)
-    geom_B_buffer = geom_B.intersection(buffer)
-    buffer_covered = geom_B_buffer.area / buffer.area
-    print("Buffer area covered (%):", buffer_covered)
+    if mask is not None:
+        buffer = mask.difference(geom_A)
+        geom_B_buffer = geom_B.intersection(buffer)
+        buffer_covered = geom_B_buffer.area / buffer.area
+        results["buffer_covered"] = buffer_covered
 
-    geom_B_valid = geom_B.intersection(mask)
-    print(geom_A.area, geom_B_valid.area)
+        geom_B = geom_B.intersection(mask)
 
-    intersection = geom_A.intersection(geom_B_valid)
-    union = geom_A.union(geom_B_valid)
+    intersection = geom_A.intersection(geom_B)
+    union = geom_A.union(geom_B)
 
     intersection_area = intersection.area
     union_area = union.area
 
     recall = intersection_area / geom_A.area
-    precision = intersection_area / geom_B_valid.area
-
+    precision = intersection_area / geom_B.area
     iou = intersection_area / union_area if union_area else 0
 
-    return {
-        "iou": iou,
-        "precision": precision,
-        "recall": recall,
-    }
+    results["iou"] = iou
+    results["recall"] = recall
+    results["precision"] = precision
+
+    return results
 
 
 def load_geodataframes(folder: str) -> tuple[gpd.GeoDataFrame, gpd.GeoDataFrame]:
