@@ -1,0 +1,12 @@
+
+seed: 42
+
+gt_datapath: "../../output/ground_truth"
+pred_datapath: "../../output/sam_maps"
+  #pred_datapath: "../../output/sam_maps_plus"
+
+
+defaults:
+ - rge_module: samroad
+ - rs_module: auto-rs
+ - rc_module: auto-rc
