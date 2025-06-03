@@ -38,7 +38,7 @@ pip install -e .
 **Install `map_annotation`**:
 
 ```bash
-cd /path/to/save/map_annotation/
+cd /path/to/clone/map_annotation/
 git clone git@gitlab.tudelft.nl:intelligent-vehicles/map_annotation.git
 cd map_annotation
 git checkout dev
@@ -48,11 +48,11 @@ pip install -e .
 **Install `segment-geospatial`**:
 
 ```bash
-cd /path/to/save/map_annotation/
+cd /path/to/clone/segment_geospatial/
 git clone https://github.com/opengeos/segment-geospatial.git
 cd segment-geospatial
 ```
-[Optional] In `samgeo/text_sam` change:
+[Optional] In `samgeo/text_sam` change (for control over which GPU to run on):
 
 ```diff
 --- a/samgeo/text_sam.py
