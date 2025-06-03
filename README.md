@@ -5,9 +5,9 @@ This repository contains the official implementation of **SAM-Maps**, as describ
 **SAM-Maps** uses the Segment Anything Model (SAM) and is designed to extract map features such as roads and intersections from aerial imagery. It leverages SAM’s ability to generate high-quality masks from box prompts and applies it to geospatial data, enabling automatic and scalable road map generation in urban areas.
 
 ## News
-:white_check_mark: Code made public.
+:white_check_mark: 2025/06 Code made public.
 
-:tada: Accepted at IEEE IV 2025.
+:tada: 2025/03 Accepted at IEEE IV 2025.
 
 
 ## Overview
