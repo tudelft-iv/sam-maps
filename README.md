@@ -1,6 +1,6 @@
 # SAM-Maps: Road Map Generation for Automated Vehicles in European Urban Areas
 
-This repository contains the official implementation of **SAM-Maps**, as described in our paper submitted to **IEEE Intelligent Vehicles Symposium (IV) 2025**.
+This repository contains the official implementation of **SAM-Maps**, as described in our paper at **IEEE Intelligent Vehicles Symposium (IV) 2025**.
 
 **SAM-Maps** uses the Segment Anything Model (SAM) and is designed to extract map features such as roads and intersections from aerial imagery. It leverages SAM’s ability to generate high-quality masks from box prompts and applies it to geospatial data, enabling automatic and scalable road map generation in urban areas.
 
