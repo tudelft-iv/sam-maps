@@ -6,6 +6,7 @@ This repository contains the official implementation of **SAM-Maps**, as describ
 
 ## News
 :white_check_mark: Code made public.
+
 :tada: Accepted at IEEE IV 2025.
 
 
