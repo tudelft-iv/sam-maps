@@ -1,8 +1,9 @@
 import torch.nn as nn
-
+import torch
+import gc
 
 class Model(nn.Module):
-    def __init__(self, config, rge, rs, rc):
+    def __init__(self, config, rge, rs, rc, config_path=None):
         super(Model, self).__init__()
 
         self.config = config
@@ -10,9 +11,16 @@ class Model(nn.Module):
         self.rge = rge
         self.rs = rs
         self.rc = rc
+        self.config_path = config_path
 
     def forward(self, inputs):
         rg = self.get_roadgraph(inputs)
+        if self.config.rge_module.model_name == "samroad":   
+            if self.config.manual and ((self.config.graph.edges is None) or (self.config.graph.nodes is None)):
+                print("Graph is ready to be manually adapted.")
+                return
+        gc.collect()
+        torch.cuda.empty_cache()
         rs = self.get_semantic_mask(inputs, rg)
         rc = self.get_connected_map(rg, rs)
 

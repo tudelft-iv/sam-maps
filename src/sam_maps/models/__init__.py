@@ -2,6 +2,8 @@ from sam_maps.models.model import Model
 
 from sam_maps.models.RGE.samroad import SAMRoad
 
+from sam_maps.models.RGE.osm_extractor import OSMExtractor
+
 from sam_maps.models.RS.auto_rs import AutoRS
 
 from sam_maps.models.RC.auto_rc import AutoRC
@@ -9,6 +11,7 @@ from sam_maps.models.RC.auto_rc import AutoRC
 
 rge_modules = {
     "samroad": SAMRoad,
+    "osm_extractor": OSMExtractor,
 }
 rs_modules = {
     "auto-rs": AutoRS,

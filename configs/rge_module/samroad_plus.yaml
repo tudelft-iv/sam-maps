@@ -1,0 +1,12 @@
+model_name: samroad
+samroad_config: "/scratch/hjhboekema/mpvanandel/sam-maps/src/sam_maps/models/RGE/samroad/sam_road/config/toponet_vitb_512_cityscale.yaml"
+samroad_checkpoint: "/scratch/hjhboekema/mpvanandel/sam-maps/src/sam_maps/models/RGE/samroad/sam_road/ckpts/cityscale_vitb_512_e10.ckpt"
+graph:
+  edges: "/scratch/hjhboekema/mpvanandel/edges_drawn.geojson"
+  nodes: "/scratch/hjhboekema/mpvanandel/nodes_drawn.geojson"
+zoom: 18
+resolution: 1.0
+image_size: 2048
+bbox: [[4.35556, 52.00667, 4.36, 52.01]] #,[4.37, 52.02, 4.38, 52.03]]
+manual: True 
+apply_mask: false

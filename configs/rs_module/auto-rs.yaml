@@ -1,0 +1,56 @@
+model_name: auto-rs
+rs:
+  method: "segmentation" # "graph" or "segmentation"
+  sam:
+    model_type: "vit_h"
+    checkpoint: "/scratch/hjhboekema/mpvanandel/data/sam_weights/sam_vit_h_4b8939.pth"
+
+  grounding_dino:
+    model_id: "IDEA-Research/grounding-dino-base"
+    trees:
+      box_threshold: 0.25
+      text_threshold: 0.25
+      text_prompt: "trees"
+    roads:
+      box_threshold: 0.25
+      text_threshold: 0.25
+      text_prompt: "individual straight horizontal road"
+  lane_generation:
+    zoom: 21
+    tree_mask_size_factor: 2.0 
+    cache_results_folder: "./hd_map_generator/cache_results/osm_sammaps_timed/"
+    max_road_len: 120 #300
+      
+  centerline_extractor:
+    interpolation_step_size: 100 # pixels
+    min_smoothness_spline: 1000.
+    smoothness_factors_spline: [0.1, 0.2, 0.5, 1.0, 2.0, 3.5, 5.0, 10.0]
+    min_angle_spline: 1.5708 
+    best_road_score: 1.0 #1
+    inpaint_radius_trees: 5
+    gap_filter_size: 100
+    centerline_selection_proximity: 15 # pixels
+    centerline_heatmap_pool_threshold: 0.5
+    centerline_pool_size: 150
+    heatmap_pool_size: 25
+    simplify_tolerance_spline: 8.0
+    min_road_length_fit: 1 # 30 [m]
+    min_length_ratio: 0.75
+
+  warp_operator:
+    safety_margin_width: 3.0
+    crop_margin: 1.5
+
+
+  postprocessing:
+    max_cavity_size: 50
+
+  # Constraints Mask Selection
+  mask_operator:
+    constraints:
+      min_width: 4.0
+      tree: 0.05 #5
+      house: 0.05 #5
+      water: 0.05 #5
+
+

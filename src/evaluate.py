@@ -2,9 +2,9 @@ import os
 from typing import Optional
 import hydra
 from omegaconf import OmegaConf
+from hydra.core.global_hydra import GlobalHydra
 
-import argparse
-import numpy as np
+import json
 import geopandas as gpd
 from shapely.geometry import Polygon, LineString
 
@@ -17,7 +17,7 @@ CYCLE_LANE_ID = 3
 RELEVANT_POLYGON_TYPE = "intersection"
 
 
-@hydra.main(version_base=None, config_path="configs", config_name="config")
+@hydra.main(version_base=None, config_path="../configs", config_name="config")
 def main(config):
     set_seed(config.seed)
     OmegaConf.set_struct(config, False)
@@ -29,7 +29,7 @@ def main(config):
     print("GT area:", gdf_gt.geometry.area.sum())
 
     # Load and merge prediction data
-    pred_lanes, pred_polygons = load_geodataframes(config.pred_datapath)
+    pred_lanes, pred_polygons = load_geodataframes(os.path.join(config.pred_datapath, config.experiment_name, "RC"))
     gdf_pred = merge_geometries(pred_lanes, pred_polygons)
     print("Pred area:", gdf_pred.geometry.area.sum())
 
@@ -46,6 +46,11 @@ def main(config):
     )
     if "buffer_covered" in metrics:
         print(f"Buffer covered: {100*metrics['buffer_covered']:.01f}%")
+
+    # save as json
+    output_path = os.path.join(config.pred_datapath, config.experiment_name, "metrics.json")
+    with open(output_path, "w") as f:
+        json.dump(metrics, f)
 
 
 def merge_geometries(
@@ -108,4 +113,5 @@ def preprocess_ground_truth(
 
 
 if __name__ == "__main__":
+    GlobalHydra.instance().clear()
     main()

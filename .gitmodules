@@ -1,0 +1,3 @@
+[submodule "src/sam_maps/models/RGE/samroad/sam_road"]
+	path = src/sam_maps/models/RGE/samroad/sam_road
+	url = https://github.com/htcr/sam_road.git

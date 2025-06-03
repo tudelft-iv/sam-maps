@@ -1,0 +1,5 @@
+model_name: osm_extractor
+area_selection_method: "annot_bbox" # "place", "bbox", "annot_edges" or "annot_bbox"
+place: "Delft"
+bbox: [[4.35556, 52.00667, 4.37, 52.02]]
+network_type: "drive"

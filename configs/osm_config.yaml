@@ -1,0 +1,33 @@
+
+seed: 42
+experiment_name: "osm"
+gt_datapath: "./output/ground_truth"
+pred_datapath: "./output/predictions"
+cache_datapath: "./output/cache"
+
+annot_file: "/scratch/hjhboekema/mpvanandel/data/processed/lanes.gpkg"
+
+w_init: 4.5
+trim_dist: 4.0
+max_part_trim: 0.4
+
+from_crs: "EPSG:4326"
+target_crs: "EPSG:32631"
+area_selection_method: "annot_bbox" # "place", "bbox", "annot_edges" or "annot_bbox"
+place: "Delft"
+#bbox: [[4.35556, 52.00667, 4.37, 52.02]]
+bbox: [[4.35196, 52.00463, 4.37225, 52.01700]] #,[4.37, 52.02, 4.38, 52.03]]
+
+gpus: [7]
+processes_per_gpu: 1
+flags: 
+  save_cache: false
+  use_cache: true
+  save_images: false
+  verbose: false
+  overwrite_tif_files: true
+
+defaults:
+ - rge_module: osm_extractor 
+ - rs_module: auto-rs
+ - rc_module: auto-rc

@@ -1,0 +1,28 @@
+
+seed: 42
+experiment_name: "osm_test"
+gt_datapath: "./output/ground_truth"
+pred_datapath: "./output/predictions"
+cache_datapath: "./output/cache"
+
+annot_file: "/scratch/hjhboekema/mpvanandel/data/processed/lanes.gpkg"
+
+w_init: 4.5
+trim_dist: 4.0
+max_part_trim: 0.4
+
+from_crs: "EPSG:4326"
+target_crs: "EPSG:32631"
+gpus: [5,6]
+processes_per_gpu: 2
+flags: 
+  save_cache: false
+  use_cache: true
+  save_images: false
+  verbose: false
+  overwrite_tif_files: true
+
+defaults:
+ - rge_module: samroad
+ - rs_module: auto-rs
+ - rc_module: auto-rc
