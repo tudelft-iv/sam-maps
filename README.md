@@ -26,8 +26,7 @@ This repository contains the official implementation of **SAM-Maps**, as describ
 Clone the repository and install the dependencies:
 
 ```bash
-# TODO: adapt to the public repo, when available
-git clone git@gitlab.tudelft.nl:hidde_students/sam-maps.git 
+git clone git@github.com:tudelft-iv/sam-maps.git
 cd sam-maps
 git submodule update --init --recursive
 conda create -n sam_maps python=3.12 pip
@@ -40,9 +39,8 @@ pip install -e .
 
 ```bash
 cd /path/to/clone/map_annotation/
-git clone git@gitlab.tudelft.nl:intelligent-vehicles/map_annotation.git
+git clone git@github.com:tudelft-iv/map_annotation.git
 cd map_annotation
-git checkout dev
 pip install -e .
 ```
 
