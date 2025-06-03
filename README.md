@@ -1,4 +1,4 @@
-# SAM-Maps: Road Map Generation for Automated Vehicles in European Urban Areas
+# SAM-Maps: Road Map Generation for Automated Vehicles in Urban Areas
 
 This repository contains the official implementation of **SAM-Maps**, as described in our paper at **IEEE Intelligent Vehicles Symposium (IV) 2025**.
 
