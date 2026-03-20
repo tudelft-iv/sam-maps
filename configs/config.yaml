@@ -1,11 +1,11 @@
 
 seed: 42
 experiment_name: "osm_test"
-gt_datapath: "./output/ground_truth"
+gt_datapath: "./data/vod_annotations"
 pred_datapath: "./output/predictions"
 cache_datapath: "./output/cache"
 
-annot_file: "/scratch/hjhboekema/mpvanandel/data/processed/lanes.gpkg"
+annot_file: "./data/vod_annotations/lanes.gpkg"
 
 w_init: 4.5
 trim_dist: 4.0

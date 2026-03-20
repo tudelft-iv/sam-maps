@@ -87,7 +87,8 @@ pip install -e .
 ```
 
 
-[Optional] Download the View-of-Delft Prediction dataset to obtain the maps used as ground truth in our experiments: https://intelligent-vehicles.org/datasets/view-of-delft/.   
+[Optional] Download the map annotations from the View-of-Delft Prediction dataset that we used as ground truth for our experiments in the paper: https://surfdrive.surf.nl/s/Zfb46oy5BYJr4eX (password: sammaps-vod). 
+Unzip the `data.zip` file in the root of this project.
 
 ## Method Overview
 ![pipeline](assets/sam_maps_pipeline.jpg)
@@ -158,7 +159,9 @@ python src/generate_map.py
 If you want to make manual changes to the graph proposed by SAM-Road, make sure to set manual to `True`. If you have manipulated the road graph, add the geojson files of the new graph to `graph.nodes` and `graph.edges` and set manual to `True`. This will ensure that this new graph is used in the rest of the pipeline, rather than trying to find a new road graph using SAM-Road.
 
 ### Evaluate Results
-This evaluation now evaluates against the View-of-Delft Prediction dataset. If you want to use another ground truth road map (that is annotated in a similar fashion to the VoD-P dataset), adapt `gt_datapath` to the path where this road map is stored.  
+By default, the evaluation script compares the predictions to the annotations from the View-of-Delft Prediction dataset. You will need the ground truth map for this. 
+
+If you want to use another ground truth road map (that is annotated in a similar fashion to the VoD-P dataset), adapt `gt_datapath` to the path where this road map is stored.  
 
 ```bash
 python src/evaluate.py

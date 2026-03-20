@@ -5,7 +5,7 @@ gt_datapath: "./output/ground_truth"
 pred_datapath: "./output/predictions"
 cache_datapath: "./output/cache"
 
-annot_file: "/scratch/hjhboekema/mpvanandel/data/processed/lanes.gpkg"
+annot_file: "./data/vod_annotations/lanes.gpkg"
 
 w_init: 4.5
 trim_dist: 4.0
