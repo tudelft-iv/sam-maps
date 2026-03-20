@@ -1,7 +1,7 @@
 
 seed: 42
 experiment_name: "sam_maps_5,0_4,0_3,0"
-gt_datapath: "./output/ground_truth"
+gt_datapath: "./data/vod_annotations"
 pred_datapath: "./output/predictions"
 cache_datapath: "./output/cache"
 
